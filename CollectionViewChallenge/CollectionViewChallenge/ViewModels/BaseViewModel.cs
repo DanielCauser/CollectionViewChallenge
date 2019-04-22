@@ -99,7 +99,5 @@ namespace CollectionViewChallenge.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-        public abstract void LoadData();
     }
 }

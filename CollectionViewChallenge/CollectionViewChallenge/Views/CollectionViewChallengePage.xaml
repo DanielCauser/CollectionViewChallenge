@@ -9,12 +9,13 @@
              x:Class="CollectionViewChallenge.Views.CollectionViewChallengePage">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="Load Data" Command="{Binding LoadCommand}" />
             <!-- Use your own layout and functionality here! -->
             <CollectionView ItemsSource="{Binding Posts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="5">
-                            <Label Text="{Binding .}" FontSize="30"/>
+                            <Label Text="{Binding Name}" FontSize="30"/>
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

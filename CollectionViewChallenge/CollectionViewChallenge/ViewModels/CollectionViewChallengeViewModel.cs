@@ -14,20 +14,19 @@ namespace CollectionViewChallenge.ViewModels
     {
         public CollectionViewChallengeViewModel()
         {
-            _posts = new List<string> { "Causer" };
-            //_posts = new List<Post> { new Post { Name = " Causer" } };
+            _posts = new List<Post>();
         }
 
-        private List<string> _posts;
-        public List<string> Posts
+        private List<Post> _posts;
+        public List<Post> Posts
         {
             get => _posts;
             set => SetProperty(ref _posts, value);
         }
 
-        public ICommand LoadCommand => new Command(() => OnLoadCommand());
+        public ICommand LoadCommand => new Command(async () => await OnLoadCommand());
 
-        public async void OnLoadCommand()
+        public async Task OnLoadCommand()
         {
             await RunSafeAsync(async () =>
             {
@@ -36,16 +35,11 @@ namespace CollectionViewChallenge.ViewModels
             });
         }
 
-        public override async void LoadData()
-        {
-            await RunSafeAsync(async () =>
-            {
-                await LoadPosts();
-            });
-        }
-
         public async Task LoadPosts()
         {
+
+            Posts = new List<Post> { new Post { Name = "Causer" }, new Post { Name = "Daniel" } };
+            //Posts = new List<Post> { "Causer" };
             //using (var httpClient = new HttpClient())
             //{
             //    var result = await httpClient.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
