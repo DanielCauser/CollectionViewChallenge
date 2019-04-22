@@ -37,14 +37,11 @@ namespace CollectionViewChallenge.ViewModels
 
         public async Task LoadPosts()
         {
-
-            Posts = new List<Post> { new Post { Name = "Causer" }, new Post { Name = "Daniel" } };
-            //Posts = new List<Post> { "Causer" };
-            //using (var httpClient = new HttpClient())
-            //{
-            //    var result = await httpClient.GetStringAsync("https://jsonplaceholder.typicode.com/posts");
-            //    Posts = JsonConvert.DeserializeObject<List<Post>>(result);
-            //}
+            using (var httpClient = new HttpClient())
+            {
+                var result = await httpClient.GetStringAsync("https://uinames.com/api?ext&amount=25");
+                Posts = JsonConvert.DeserializeObject<List<Post>>(result);
+            }
         }
     }
 }

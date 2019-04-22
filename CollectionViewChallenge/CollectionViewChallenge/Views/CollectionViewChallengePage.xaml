@@ -6,6 +6,8 @@
              mc:Ignorable="d"
              ios:Page.UseSafeArea="true"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="CollectionViewChallenge.Views.CollectionViewChallengePage">
     <ContentPage.Content>
         <StackLayout>
@@ -14,9 +16,49 @@
             <CollectionView ItemsSource="{Binding Posts}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Padding="5">
-                            <Label Text="{Binding Name}" FontSize="30"/>
-                        </StackLayout>
+                        <Grid RowSpacing="0"
+                              ColumnSpacing="0"
+                              Margin="0"
+                              Padding="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            
+                            <ffimageloading:CachedImage Grid.Column="0"
+                                                        Grid.Row="0"
+                                                        HorizontalOptions="Center" 
+                                                        VerticalOptions="Center"
+                                                        WidthRequest="40" 
+                                                        HeightRequest="40"
+                                                        DownsampleToViewSize="true"
+                                                        Source = "{Binding Photo}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation/>
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            
+                            <Label Grid.Column="1" 
+                                   Grid.Row="0"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Name}" 
+                                   FontSize="Medium"/>
+                            
+                            <ffimageloading:CachedImage Grid.ColumnSpan="2"
+                                                        Grid.Row="1"
+                                                        Margin="0"
+                                                        HorizontalOptions="Start" 
+                                                        VerticalOptions="Start"
+                                                        HeightRequest="600"
+                                                        WidthRequest="600"
+                                                        DownsampleToViewSize="true"
+                                                        Source = "{Binding Photo}"/>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
